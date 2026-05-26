@@ -1,65 +1,112 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="bg-gray-50 text-gray-900">
+      {/* Navbar */}
+      <header className="fixed w-full bg-white shadow z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+          <h1 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-500">
+            HealthWealthTools
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+          <nav className="space-x-6 font-medium text-gray-700">
+            <Link href="/">Home</Link>
+            <Link href="/tools">Tools</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/about">About</Link>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section - Split Screen */}
+      <section className="h-screen grid md:grid-cols-2">
+        {/* Left side: text */}
+        <div className="flex flex-col justify-center items-start px-10 bg-gradient-to-r from-green-500 to-blue-500 text-white">
+          <h2 className="text-5xl font-extrabold mb-6">Smarter Health & Wealth Planning</h2>
+          <p className="text-lg max-w-md mb-8 opacity-90">
+            Tools that combine fitness tracking with financial planning — all in one place.
+          </p>
+          <Link href="/tools">
+            <button className="bg-white text-green-600 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition">
+              Explore Tools
+            </button>
+          </Link>
+        </div>
+        {/* Right side: image */}
+        <div
+          className="bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1600&q=80')",
+          }}
+        ></div>
+      </section>
+
+      {/* Tools Section - Card Grid */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <h2 className="text-3xl font-extrabold text-center mb-12">Popular Tools</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            { title: "Calorie Tracker", desc: "Monitor your daily calorie intake.", link: "/tools/calorie" },
+            { title: "Investment Planner", desc: "Plan your savings and investments.", link: "/tools/investment" },
+            { title: "Retirement Calculator", desc: "Estimate your future wealth goals.", link: "/tools/retirement" },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition transform hover:-translate-y-1"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              <h3 className="text-xl font-bold mb-3 text-green-600">{item.title}</h3>
+              <p className="text-gray-600 mb-6">{item.desc}</p>
+              <Link href={item.link}>
+                <button className="bg-gradient-to-r from-green-600 to-blue-500 text-white px-5 py-2 rounded-full font-medium hover:opacity-90">
+                  Try Now
+                </button>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section - Horizontal Layout */}
+      <section className="py-24 px-6 bg-gray-100 flex flex-col md:flex-row items-center md:items-start md:justify-center gap-12">
+        <div className="md:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80"
+            alt="Healthy lifestyle"
+            className="rounded-xl shadow-lg"
+          />
+        </div>
+        <div className="md:w-1/2 text-center md:text-left">
+          <h2 className="text-3xl font-extrabold mb-6">About HealthWealthTools</h2>
+          <p className="text-gray-700 leading-relaxed">
+            We believe health and wealth are deeply connected. Our mission is to provide simple, interactive tools
+            that help you track your fitness and plan your finances — empowering you to live smarter every day.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 text-center bg-gradient-to-r from-green-500 to-blue-500 text-white">
+        <h2 className="text-3xl font-extrabold mb-6">Start Your Journey Today</h2>
+        <p className="max-w-xl mx-auto mb-8 opacity-90">
+          Join thousands of users improving their health and wealth with our free tools.
+        </p>
+        <Link href="/signup">
+          <button className="bg-white text-green-600 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition">
+            Get Started
+          </button>
+        </Link>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 text-center bg-gray-900 text-gray-300">
+        <p>© {new Date().getFullYear()} HealthWealthTools. All rights reserved.</p>
+        <div className="mt-4 space-x-4">
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/contact">Contact</Link>
         </div>
-      </main>
-    </div>
+      </footer>
+    </main>
   );
 }
